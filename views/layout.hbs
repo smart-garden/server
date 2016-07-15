@@ -2,9 +2,39 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/style.css' />
+
+    <!-- Foundation compiled CSS  -->
+    <link rel="stylesheet" href="/css/foundation.css" media="screen" title="Foundation | Apps" charset="utf-8">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
   </head>
-  <body>
+
+  <body class="{{title_slug}}">
+    <!-- Breadcrumbs implememtnation using prev_views array from router -->
+    {{#if view_ctx}}
+      <ul class="breadcrumbs">
+        {{#each view_ctx.prev}}
+          <!-- User hbs to iterate through prev array  -->
+          <li><a href="{{this}}">{{this}}</a></li>
+        {{/each}}
+        <!-- Also put in the current page -->
+        <li class="current"><a>{{view_ctx.curr}}</a></li>
+      </ul>
+    {{/if}}
     {{{body}}}
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"</script>
+    <script src="bower_components/foundation-apps/js/angular/foundation.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="bower_components/foundation/js/foundation/foundation.accordion.js"></script>
+
+
+    <script>
+        $(document).foundation();
+    </script>
   </body>
+
 </html>
