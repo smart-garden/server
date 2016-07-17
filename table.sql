@@ -1,0 +1,30 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS gardens CASACADE;
+
+CREATE TABLE states (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE location (
+	id SERIAL PRIMARY KEY,
+	Address char(255) NOT NULL UNIQUE,
+	ZIP INTEGER NOT NULL,
+	state_id INTEGER REFERENCES states (id) NOT NULL
+);
+
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	username nvarchar(50) NOT NULL UNIQUE,
+	password nvarchar(50) NOT NULL,
+	reg_date INTEGER NOT NULL
+);
+
+CREATE TABLE gardens (
+	id SERIAL PRIMARY KEY,
+	water_usage INTEGER NOT NULL,
+	power_usage INTEGER NOT NULL,
+	reg_date INTEGER NOT NULL
+	location_id FOREIGN KEY REFERENCES locations (id)
+);
