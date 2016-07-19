@@ -1,0 +1,19 @@
+<!-- NOTE: this is the view for all gardens. Lmk if it is comfusing but I plan to name the single view manager, but if you see routes/index, it is routed via /manage/:gardenId -->
+
+<div class="grid-frame v-align align-center">
+    <div class="card columns small-12 medium-8 large-4 large-centered text-center" style="max-height: 17.5rem;">
+        <div class="card-divider">Manage Your Gardens</div>
+        <div class="card-section">
+          <div class="row">
+            {{#if gardens_exist}}
+              {{#each gardens}}
+              <a class="button columns small-12" href="/manage/{{this.id}}">Garden {{this.id}}</a>
+              {{/each}}
+            {{else}}
+              <span>No gardens found, try adding one!</span>
+              <a href="/register" class="button columns small-12">Register a Garden</a>
+            {{/if}}
+          </div>
+        </div>
+    </div>
+</div>
