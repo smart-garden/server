@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var db = require("../model/index");
+
 function slugify(text) {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
@@ -14,6 +16,17 @@ function slugify(text) {
 router.get('/', function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
+
+router.get('/login/submit/:name', function(req, res) {
+  db.user.find({
+    where: {
+      name: req.params.id
+    }
+  }).then(function(user) {
+    res.json(user);
+  });
+});
+
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
