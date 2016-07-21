@@ -27,6 +27,11 @@ router.get('/login/submit/:name', function(req, res) {
   });
 });
 
+/* GET SignUp Page. */
+router.get('/signup', function(req, res, next) {
+  res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
+});
+
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
