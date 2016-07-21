@@ -27,10 +27,12 @@ router.get('/login/submit/:name', function(req, res) {
   });
 });
 
+//Tim's addition
 /* GET SignUp Page. */
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
 });
+//end of addition
 
 
 /* GET home page. */
