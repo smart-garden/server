@@ -4,6 +4,32 @@ var models = require("../model");
 
 var db = require("../model/index");
 
+// NOTE: These are dummy objects of no real use set up for the purpose
+//        of creating a realistic routing mockup
+// TODO Remove this when we have a real user implementation
+var fakeUser = {
+  name: "Username1",
+  pass: "fakePass",
+  email: "myemail@me.com"
+};
+var gardens_exist = true;
+var gardens = [
+  {
+    id: 'fakeId1',
+    ph: '14',
+    species: 'chard',
+    days_remain: '48'
+  },
+  {
+    id: 'fakeId2',
+    ph: '7',
+    species: 'arugula',
+    days_remain: '17'
+  }
+];
+
+// END REMOVE DUMMIES
+
 function slugify(text) {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
@@ -55,12 +81,6 @@ router.get('/home', function(req, res, next) {
   res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
 });
 
-// TODO Remove this when we have a real user implememtnation
-var fakeUser = {
-  name: "Username1",
-  pass: "fakePass",
-  email: "myemail@me.com"
-};
 
 /* GET settings page. */
 router.get('/settings', function(req, res, next) {
@@ -93,16 +113,63 @@ router.get('/alerts', function(req, res, next) {
   });
 });
 
-/* GET alerts page. */
+/* GET register page. */
 router.get('/register', function(req, res, next) {
   res.render('register', {
     title: 'Register a New Garden | Add a Garden or Module',
-    title_slug: "alerts",
+    title_slug: "register",
     view_ctx: {
       prev: [
         "Home"
       ],
       curr: "Register"
+    },
+    user: fakeUser
+  });
+});
+
+/* GET manage all gardens page. */
+router.get('/manage', function(req, res, next) {
+  res.render('manage', {
+    title: 'Mange Gardens | Stay In Control',
+    title_slug: "manage",
+    view_ctx: {
+      prev: [
+        "Home"
+      ],
+      curr: "Manage Gardens"
+    },
+    user: fakeUser,
+    gardens: gardens,
+    gardens_exist: gardens_exist
+  });
+});
+
+
+// Nice little function to look through gardens array for
+// garden object with a matching id
+function matchGarden(g) {
+  return (g.id == this);
+}
+
+/* GET manage individual garden page. */
+router.get('/manage/:gardenId', function(req, res, next) {
+  // get the garden id param from the http req
+  var garden_id = req.params.gardenId;
+  // match the garden from gardens[] w/ matching id
+  var specific = gardens.find(matchGarden,garden_id);
+
+  res.render('manager', {
+    specific: specific,
+    garden_id: garden_id,
+    title: 'Manage Single Garden | Manage'+specific.species+' Garden '+garden_id+'',
+    title_slug: "manage",
+    view_ctx: {
+      prev: [
+        "Home",
+        "Manage"
+      ],
+      curr: specific.species + " garden " + garden_id
     },
     user: fakeUser
   });
