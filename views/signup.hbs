@@ -2,7 +2,7 @@
     <div class="card columns small-12 medium-8 large-4 large-centered text-center" style="max-height: 50rem;">
         <div class="card-divider">Smart Garden SignUp</div>
         <div class="card-section">
-            <form>
+            <form action ="/signup/submit" method ="post">
                 <label>
                     First Name
                     <input type="text" name="firstname" placeholder="John" required>
@@ -13,20 +13,24 @@
                 </label>
                 <label>
                     Username
-                    <input type="text" placeholder="SmartGrower99" required>
+                    <input type="text" name = "username" placeholder="SmartGrower99" required>
                 </label>
                 <label>
                     Email
-                    <input type="email" placeholder="name@domain.com" required>
+                    <input type="email" name = "email" placeholder="name@domain.com" required>
                 </label>
                 <label>
                     Password
-                    <input type="password" placeholder="••••••" required>
+                    <input type="password" name  = "password" placeholder="••••••" required>
                 </label>
                 <label>
                     Confirm Password
-                    <input type="password" placeholder="••••••" required>
+                    <input type="password" name = "password"
+                    placeholder="••••••" required>
                 </label>
+                <div class="button">
+                <button type="submit">Submit</button>
+            </div>
             </form>
             <!-- TODO: make the SignUp actually work. Session, etc  -->
             <a href="home" class="button success">Submit</a>

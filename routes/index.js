@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var models = require("../model");
 
 var db = require("../model/index");
 
@@ -25,6 +26,20 @@ router.get('/login/submit/:name', function(req, res) {
   }).then(function(user) {
     res.json(user);
   });
+});
+
+router.post('/signup/submit', function(req, res) {
+  models.sequelize.sync().then(function() {
+  db.User.create({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    username: req.body.username,
+    //password: req.body.password,
+    email: req.body.email
+  }).then(function(user) {
+    res.json(user);
+  });
+});
 });
 
 //Tim's addition

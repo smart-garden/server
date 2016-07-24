@@ -5,13 +5,10 @@ var path = require("path");
 var Sequelize = require ('sequelize');
 //your user account and password for postgres
 //todo: will change how this is done after routes are complete.
-var sequelize = new Sequelize ('mydb', 'user','p_word', {
+var sequelize = new Sequelize ('mydb', 'postgres','EC12RC45G2', {
 	host:'localhost',
 	dialect: 'postgres',
 	freezeTableName: true,
-	define: {
-		timestamps: true
-	},
 
 	pool: {
 		max: 9,

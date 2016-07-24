@@ -4,7 +4,16 @@
  
 
 module.exports = function(sequelize, DataTypes) {
-    var User = sequelize.define("Users", {
+    var User = sequelize.define("User", {
+        firstname: {
+            type: DataTypes.STRING,
+            allowNull: false
+
+        },
+        lastname: {
+            type:DataTypes.STRING,
+            allowNull:false
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -13,10 +22,13 @@ module.exports = function(sequelize, DataTypes) {
                 is: /^[a-z0-9\_\-]+$/i,
             }
         },
-        pass: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+
+         //password: {
+            //type: DataTypes.STRING,
+            //allowNull: false,
+            
+        //},
+       
         email: {
             type:DataTypes.STRING,
             validate: {
@@ -24,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     }, {
-       tableName: 'Tasks'
+       tableName: 'users'
     });
 
     return User;
