@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require("../model");
-
+var dbs = require('../client/database.js');
 var db = require("../model/index");
 
 // NOTE: These are dummy objects of no real use set up for the purpose
@@ -55,18 +55,22 @@ router.get('/login/submit/:name', function(req, res) {
 });
 
 router.post('/signup/submit', function(req, res) {
-  models.sequelize.sync().then(function() {
-  db.User.create({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    username: req.body.username,
-    //password: req.body.password,
-    email: req.body.email
-  }).then(function(user) {
-    res.json(user);
+  dbs.addUser(req.body.firstname, req.body.lastname, req.body.username, req.body.email, function (data, success) {
+    if (success) {
+      var user = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        email: req.body.email
+      }
+      res.json(user);
+    }
+    else {
+      console.log("no good");
+    }
   });
 });
-});
+  
 
 //Tim's addition
 /* GET SignUp Page. */
