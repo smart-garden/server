@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var models = require("../model");
-var dbs = require('../client/database.js');
-//var db = require("../model/index");
+var db = require('../client/database.js');
 
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
@@ -44,18 +42,13 @@ router.get('/', function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
+//TODO
 router.get('/login/submit/:name', function(req, res) {
-  db.user.find({
-    where: {
-      name: req.params.id
-    }
-  }).then(function(user) {
-    res.json(user);
-  });
+  res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
 router.post('/signup/submit', function(req, res) {
-  dbs.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
+  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
     if (success) {
       var user = {
         firstname: req.body.firstname,
@@ -74,20 +67,15 @@ router.post('/signup/submit', function(req, res) {
   });
 });
   
-
-//Tim's addition
 /* GET SignUp Page. */
 router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
 });
-//end of addition
-
 
 /* GET home page. */
 router.get('/home', function(req, res, next) {
   res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
 });
-
 
 /* GET settings page. */
 router.get('/settings', function(req, res, next) {
