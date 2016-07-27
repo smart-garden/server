@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var models = require("../model");
+//var models = require("../model");
 var dbs = require('../client/database.js');
-var db = require("../model/index");
+//var db = require("../model/index");
 
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
@@ -55,18 +55,21 @@ router.get('/login/submit/:name', function(req, res) {
 });
 
 router.post('/signup/submit', function(req, res) {
-  dbs.addUser(req.body.firstname, req.body.lastname, req.body.username, req.body.email, function (data, success) {
+  dbs.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
     if (success) {
       var user = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         username: req.body.username,
+        pass: req.body.password,
         email: req.body.email
       }
-      res.json(user);
+      var msg = "sign up successful";
+       res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
     }
     else {
-      console.log("no good");
+      var msg = "signup failed";
+      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
     }
   });
 });
