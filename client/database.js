@@ -2,7 +2,7 @@
 //var models = require("../model");
 var options = {}; //options are empty
 var pgp = require('pg-promise')(options);
-var db = pgp('postgress://UserN:p_word@localhost:5432/mydb');
+var db = pgp('postgress://postgres:EC12RC45G2@localhost:5432/mydb');
 
 //Function that adds a user to the postgres database
 //uses sql query language instead of sequelize now
@@ -28,6 +28,28 @@ addUser = function(firstname, lastname, email, username, pass, done ) {
 	})  
 }
 
+/*function to find users*/
+getUser = function(email, done) {
+    var query = "SELECT * FROM users " +
+              "WHERE email = '"+ email +"';";
+
+   db.any(query)
+    .then(function (data) {
+      console.log(data);
+      if (data.length > 0)
+        done(data[0], true);
+      else
+        done(null, false);
+    })
+    .catch(function (error) {
+      console.log(error);
+      done(null, false);
+    });
+}
+
+
+
+
 /*function to get the current day so that it can be used for 
 the registration date field */	
 function today() {
@@ -42,5 +64,6 @@ function today() {
 
 
 module.exports = {
-	addUser: addUser
+	addUser: addUser,
+	getUser: getUser
 }

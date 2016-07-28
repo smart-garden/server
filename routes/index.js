@@ -42,9 +42,20 @@ router.get('/', function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
-//TODO
-router.get('/login/submit/:name', function(req, res) {
-  res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
+
+/*login*/
+router.get('/login/submit/', function(req, res) {
+  db.getUser(req.query.email, function (user, success) {
+      if (!success) {
+          var msg = "Username doesn't exist";
+          res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
+      }
+      else {
+          console.log(user);
+          //req.session.User = user;
+          res.redirect('/home');
+      }
+  });
 });
 
 /* POST the signup form into database and returns 
@@ -60,10 +71,11 @@ router.post('/signup/submit', function(req, res) {
         email: req.body.email
       }
       var msg = "sign up successful";
-       res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      //req.session.user = user;
+      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
     }
     else {
-      var msg = "signup failed";
+      var msg = "username or email already in use";
       res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
     }
   });
