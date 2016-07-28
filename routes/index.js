@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../client/database.js');
 
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
@@ -42,42 +41,11 @@ router.get('/', function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
-//TODO
-router.get('/login/submit/:name', function(req, res) {
-  res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
-});
-
-/* POST the signup form into database and returns 
-success or failure */
-router.post('/signup/submit', function(req, res) {
-  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
-    if (success) {
-      var user = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        username: req.body.username,
-        pass: req.body.password,
-        email: req.body.email
-      }
-      var msg = "sign up successful";
-       res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
-    }
-    else {
-      var msg = "signup failed";
-      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
-    }
-  });
-});
-  
-/* GET SignUp Page. */
-router.get('/signup', function(req, res, next) {
-  res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
-});
-
 /* GET home page. */
 router.get('/home', function(req, res, next) {
   res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
 });
+
 
 /* GET settings page. */
 router.get('/settings', function(req, res, next) {
