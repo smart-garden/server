@@ -47,6 +47,8 @@ router.get('/login/submit/:name', function(req, res) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
+/* POST the signup form into database and returns 
+success or failure */
 router.post('/signup/submit', function(req, res) {
   db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
     if (success) {
