@@ -2,7 +2,7 @@
 //var models = require("../model");
 var options = {};
 var pgp = require('pg-promise')(options);
-var db = pgp('postgress://postgres:EC12RC45G2@localhost:5432/mydb');
+var db = pgp('postgress://userN:p_word@localhost:5432/mydb');
 
 
 addUser = function(firstname, lastname, email, username, pass, done ) {
