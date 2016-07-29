@@ -16,6 +16,7 @@
     "passport": "^0.3.2",
     "pg": "^6.0.2",
     "pg-hstore": "^2.3.2",
+    "pg-promise": "^5.2.6",
     "sequelize": "^3.23.6",
     "serve-favicon": "~2.3.0"
   }
