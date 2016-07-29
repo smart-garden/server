@@ -1,0 +1,23 @@
+{
+  "name": "smartgarden",
+  "description": "",
+  "main": "app.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "foundation-apps": "^1.2.0",
+    "font-awesome": "fontawesome#^4.6.3",
+    "angular-foundation-6": "https://github.com/circlingthesun/angular-foundation-6.git#^0.9.42"
+  },
+  "resolutions": {
+    "angular": "~1.5.0"
+  }
+}

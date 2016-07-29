@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+
+    <!-- Foundation compiled CSS  -->
+    <link rel="stylesheet" href="/css/foundation.css" media="screen" title="Foundation | Apps" charset="utf-8">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="bower_components/foundation-apps/dist/js/foundation-apps-templates.min.js"></script>
+    <script src="bower_components/angular-foundation-6/dist/angular-foundation.min.js"></script>
+    <script>
+        var found = angular.module('found', ['mm.foundation']);
+        // $(document).foundation();
+    </script>
+  </head>
+
+  <body class="{{title_slug}}" ng-app="found">
+    <!-- Breadcrumbs implememtnation using prev_views array from router -->
+    {{#if view_ctx}}
+      <ul class="breadcrumbs">
+        {{#each view_ctx.prev}}
+          <!-- User hbs to iterate through prev array  -->
+          <li><a href="/{{this}}">{{this}}</a></li>
+        {{/each}}
+        <!-- Also put in the current page -->
+        <li class="current"><a>{{view_ctx.curr}}</a></li>
+      </ul>
+    {{/if}}
+    {{{body}}}
+
+  </body>
+
+</html>
