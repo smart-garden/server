@@ -3,21 +3,9 @@
 var fs = require("fs");
 var path = require("path");
 var Sequelize = require ('sequelize');
-//your user account and password for postgres
-//todo: will change how this is done after routes are complete.
-// var sequelize = new Sequelize ('mydb', 'postgres','EC12RC45G2', {
-// 	host:'localhost',
-// 	dialect: 'postgres',
-// 	freezeTableName: true,
-
-// 	pool: {
-// 		max: 9,
-// 		min: 0,
-// 		idle: 10000
-// 	}
-// });
-
-var sequelize = new Sequelize ('postgres', 'postgres','Baby4214', {
+// your user account and password for postgres
+// todo: will change how this is done after routes are complete.
+var sequelize = new Sequelize ('mydb', 'postgres','EC12RC45G2', {
 	host:'localhost',
 	dialect: 'postgres',
 	freezeTableName: true,

@@ -1,11 +1,10 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS gardens CASACADE;
-/* Tim's Contribution */
 DROP TABLE IF EXISTS garden_ownership CASCADE;
 DROP TABLE IF EXISTS levels CASACADE;
 DROP TABLE IF EXISTS pods CASCADE;
 DROP TABLE IF EXISTS plants CASACADE;
-/* end Tim's Contribution*/
+
 
 CREATE TABLE states (
 	id SERIAL PRIMARY KEY,
@@ -19,7 +18,6 @@ CREATE TABLE location (
 	state_id INTEGER REFERENCES states (id) NOT NULL
 );
 
-/* Begin Tim's Contribution */
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	firstname TEXT NOT NULL,
@@ -64,4 +62,3 @@ CREATE TABLE plants (
 	settle on a database to pull info from. Or make our own reference
 	data table*/ 
 );
-/* End Tim's Contribution*/
