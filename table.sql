@@ -43,26 +43,25 @@ CREATE TABLE garden_ownership (
 	user_id FOREIGN KEY REFERENCES users(id),
 	garden_id FOREIGN KEY REFERENCES gardens(id)
 );
-/* Redefine CHECK CONSTRAINTS after research how to check that the level 
-	or pod number is not already in use on the garden or level based on
-	garden or level id */
+
 CREATE TABLE levels (
 	id SERIAL PRIMARY KEY,
 	sku TEXT NOT NULL UNIQUE,
-	level_num INT NOT NULL CHECK(/* level# does not exist on current garden */),
+	level_num INT NOT NULL UNIQUE,
 	garden_id FOREIGN KEY REFERENCES gardens(id)
 ),
 
 CREATE TABLE pods (
 	id SERIAL PRIMARY KEY,
-	port_num INT NOT NULL CHECK(/* port# does not exist on current level */),
+	port_num INT NOT NULL UNIQUE,
 	level_id FOREIGN KEY REFERENCES levels(id),
 	plant_id FOREIGN KEY REFERENCES plants(id)
 );
-/* End Redefine */
 
 CREATE TABLE plants (
 	id SERIAL PRIMARY KEY,
-	reference_data INT, 
+	reference_data INT, /* need to pluggin reference here once we
+	settle on a database to pull info from. Or make our own reference
+	data table*/ 
 );
 /* End Tim's Contribution*/
