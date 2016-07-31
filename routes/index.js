@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var db = require('../client/database.js');
 
+var checkLoggedIn = require('./middleware/checkLoggedIn.js');
+var checkLoggedOut = require('./middleware/checkLoggedout');
+
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
 // TODO Remove this when we have a real user implementation
@@ -38,7 +41,7 @@ function slugify(text) {
 }
 
 /* GET login page. */
-router.get('/', function(req, res, next) {
+router.get('/', checkLoggedOut, function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
@@ -46,20 +49,22 @@ router.get('/', function(req, res, next) {
 /*GET login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
 //so this doesn't authenticate by password yet.
-router.post('/login/submit/', function(req, res) {
-  db.getUser(req.body.email, function (user, success) {
+router.post('/login/submit/', checkLoggedOut, function(req, res) { 
+  var email = req.body.email;
+  var pass = req.body.pass;
+
+  db.getUser(email, function (user, success) {
       if (!success) {
           var msg = "Username doesn't exist";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
       }
       else {
           console.log(user);
-          //req.session.User = user;
+          req.session.User = user;
           res.redirect('/home');
       }
   });
 });
-
 
 
 /* POST the signup form into database and returns 
@@ -77,7 +82,7 @@ router.post('/signup/submit', function(req, res) {
       }
       var msg = "sign up successful";
       //req.session.user = user;
-      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      res.render('home', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
     }
     else {
       var msg = "username or email already in use";
@@ -89,17 +94,17 @@ router.post('/signup/submit', function(req, res) {
 
 
 /* GET SignUp Page. */
-router.get('/signup', function(req, res, next) {
+router.get('/signup', checkLoggedOut, function(req, res, next) {
   res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
 });
 
 /* GET home page. */
-router.get('/home', function(req, res, next) {
+router.get('/home', checkLoggedIn, function(req, res, next) {
   res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
 });
 
 /* GET settings page. */
-router.get('/settings', function(req, res, next) {
+router.get('/settings', checkLoggedIn, function(req, res, next) {
   res.render('settings', {
     title: 'User Settings | Manage your SmartGarden Account',
     title_slug: "settings",
@@ -115,7 +120,7 @@ router.get('/settings', function(req, res, next) {
 });
 
 /* GET alerts page. */
-router.get('/alerts', function(req, res, next) {
+router.get('/alerts', checkLoggedIn, function(req, res, next) {
   res.render('alerts', {
     title: 'User Alerts | Stay on top of your SmartGarden tasks',
     title_slug: "alerts",
@@ -130,7 +135,7 @@ router.get('/alerts', function(req, res, next) {
 });
 
 /* GET register page. */
-router.get('/register', function(req, res, next) {
+router.get('/register', checkLoggedIn, function(req, res, next) {
   res.render('register', {
     title: 'Register a New Garden | Add a Garden or Module',
     title_slug: "register",
@@ -145,7 +150,7 @@ router.get('/register', function(req, res, next) {
 });
 
 /* GET manage all gardens page. */
-router.get('/manage', function(req, res, next) {
+router.get('/manage', checkLoggedIn, function(req, res, next) {
   res.render('manage', {
     title: 'Mange Gardens | Stay In Control',
     title_slug: "manage",
@@ -169,7 +174,7 @@ function matchGarden(g) {
 }
 
 /* GET manage individual garden page. */
-router.get('/manage/:gardenId', function(req, res, next) {
+router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
   // get the garden id param from the http req
   var garden_id = req.params.gardenId;
   // match the garden from gardens[] w/ matching id

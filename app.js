@@ -10,6 +10,16 @@ var users = require('./routes/users');
 
 var app = express();
 
+// include redis package for session handling
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+
+// create new redis instance for session handling
+app.use(session({
+  store: new RedisStore(),
+  secret: "redis key goes here"
+}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
