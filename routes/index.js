@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var checkLoggedIn = require('./middleware/checkLoggedIn.js');
+var checkLoggedOut = require('./middleware/checkLoggedOut.js');
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
 // TODO Remove this when we have a real user implementation
@@ -37,24 +39,32 @@ function slugify(text) {
 }
 
 /* GET login page. */
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
+router.get('/', checkLoggedOut, function(req, res, next) {
+  	res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
 
 /*GET login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
 //so this doesn't authenticate by password yet.
-router.post('/login/submit/', function(req, res) {
+router.post('/login/submit/', checkLoggedOut, function(req, res) {
   db.getUser(req.body.email, function (user, success) {
       if (!success) {
           var msg = "Username doesn't exist";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
       }
-      else {
-          console.log(user);
+      if(!results.account) {
+          var msg = 'Account not found';
+          res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
+      }
+      if (results.users.length > 0) {
+          console.log(results);
           //req.session.User = user;
           res.redirect('/home');
       }
+	  else{
+		  var msg = 'Account not authorized'
+		  res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
+	  }
   });
 });
 
