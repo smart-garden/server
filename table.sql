@@ -24,7 +24,7 @@ CREATE TABLE users (
 	lastname TEXT NOT NULL,
 	email CITEXT NOT NULL UNIQUE,
 	username TEXT NOT NULL UNIQUE,
-	password TEXT NOT NULL,
+	pass TEXT NOT NULL,
 	reg_date INTEGER NOT NULL
 );
 

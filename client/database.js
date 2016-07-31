@@ -1,10 +1,10 @@
-//var db = require('../model/index.js');
-//var models = require("../model");
+
 var options = {}; //options are empty
 var pgp = require('pg-promise')(options);
 var db = pgp('postgress://userN:p_word@localhost:5432/mydb');
+<<<<<<< HEAD
 
-
+>>>>>>> c93fd3ffffdb4b9a8abf2bb37af9eb3bca5d7585
 //Function that adds a user to the postgres database
 //uses sql query language instead of sequelize now
 addUser = function(firstname, lastname, email, username, pass, done ) {

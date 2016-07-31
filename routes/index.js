@@ -46,14 +46,20 @@ router.get('/', checkLoggedOut, function(req, res, next) {
 });
 
 
-/*GET login information*/
+/*POST login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
+<<<<<<< HEAD
 //so this doesn't authenticate by password yet.
 router.post('/login/submit/', checkLoggedOut, function(req, res) { 
   var email = req.body.email;
   var pass = req.body.pass;
 
   db.getUser(email, function (user, success) {
+=======
+//doesn't authenticate by password yet.
+router.post('/login/submit/', function(req, res) {
+  db.getUser(req.body.email, function (user, success) {
+>>>>>>> c93fd3ffffdb4b9a8abf2bb37af9eb3bca5d7585
       if (!success) {
           var msg = "Username doesn't exist";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
