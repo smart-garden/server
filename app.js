@@ -16,7 +16,7 @@ var RedisStore = require('connect-redis');
 
 // Use Redis Store to create session manager
 app.use(session({
-  //store: new RedisStore(),
+  //store: new RedisStore(), //my npm client cannot read 'store' property -Tim
   secret: 'place redis secret key here'
 }))
 
