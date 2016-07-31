@@ -43,9 +43,9 @@ router.get('/', function(req, res, next) {
 });
 
 
-/*GET login information*/
+/*POST login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
-//so this doesn't authenticate by password yet.
+//doesn't authenticate by password yet.
 router.post('/login/submit/', function(req, res) {
   db.getUser(req.body.email, function (user, success) {
       if (!success) {
