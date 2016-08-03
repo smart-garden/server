@@ -33,5 +33,8 @@ npm-debug.log
 # ignore sass compile stuff
 .sass-cache
 
+# Configuration file
+config.js
+
 # ignore mac system file thingy
 .DS_Store
