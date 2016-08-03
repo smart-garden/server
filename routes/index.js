@@ -60,7 +60,7 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
       }
       else {
           console.log(user);
-          req.session.User = user;
+          req.session.user = user;
           res.redirect('/home');
       }
   });
@@ -77,7 +77,7 @@ router.post('/signup/submit', function(req, res) {
         lastname: req.body.lastname,
         username: req.body.username,
         //TODO: password encryption
-        pass: req.body.password, 
+        pass: req.body.pass, 
         email: req.body.email
       }
       var msg = "sign up successful";
