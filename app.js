@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('config.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -17,7 +18,7 @@ var RedisStore = require('connect-redis')(session);
 // create new redis instance for session handling
 app.use(session({
   store: new RedisStore(),
-  secret: "redis key goes here"
+  secret: config.redis_secret
 }));
 
 // view engine setup
