@@ -1,7 +1,7 @@
 // Middleware ued to make sure the user is logged in before allowing request
 function checkLoggedIn(req, res, next) {
     //if not logged in, take to login page
-    if (!req.session || !req.session.User) {
+    if (!req.session || !req.session.user) {
         res.redirect('/');
     }
     else {

@@ -1,7 +1,7 @@
 
 var options = {}; //options are empty
 var pgp = require('pg-promise')(options);
-var db = pgp('postgress://userN:p_word@localhost:5432/mydb');
+var db = pgp('postgress://userN:pword@localhost:5432/mydb');
 
 
 //Function that adds a user to the postgres database
