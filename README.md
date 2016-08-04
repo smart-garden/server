@@ -48,6 +48,14 @@ module.exports = {
   postgres_href: "postgress://username:password@localhost:5432/database_name"
 }
 ```
-PostgreSQL setup
+PostgreSQL setup:
+
+1.During installation set port and superuse password.
+2.To create database use the following command:
+	```bash
+	psql -h localhost -U username
+	CREATE DATABASE dbname
+	```
+3.
 
 
