@@ -19,7 +19,7 @@ Download and install the following software:
 4.  PostgreSQL
 	- [Windows](https://www.postgresql.org/download/windows/)
 	- [Mac](https://www.postgresql.org/download/macosx/)
-	- Ubuntu
+	- Ubuntu			
 
 			```bash
 			sudo apt-get install postgresql-9.4
