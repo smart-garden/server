@@ -60,7 +60,7 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
       }
       else {
           console.log(user);
-          req.session.User = user;
+          req.session.user = user;
           res.redirect('/home');
       }
   });
