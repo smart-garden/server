@@ -48,6 +48,7 @@ module.exports = {
   postgres_href: "postgress://username:password@localhost:5432/database_name"
 }
 ```
+
 PostgreSQL setup
 1.	to create a database use the following command:
 	```bash
