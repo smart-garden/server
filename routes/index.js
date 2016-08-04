@@ -55,7 +55,7 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
 
   db.getUser(email,pass, function (user, success) {
       if (!success) {
-          var msg = "Username doesn't exist";
+          var msg = "incorrect login credentials";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
       }
       else {
