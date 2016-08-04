@@ -53,14 +53,14 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
   var email = req.body.email;
   var pass = req.body.pass;
 
-  db.getUser(email, function (user, success) {
+  db.getUser(email,pass, function (user, success) {
       if (!success) {
           var msg = "Username doesn't exist";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
       }
       else {
           console.log(user);
-          req.session.user = user;
+          req.session.User = user;
           res.redirect('/home');
       }
   });
@@ -70,7 +70,7 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
 /* POST the signup form into database and returns 
 success or failure */
 router.post('/signup/submit', function(req, res) {
-  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
+  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username, req.body.pass, function (data, success) {
     if (success) {
       var user = {
         firstname: req.body.firstname,
