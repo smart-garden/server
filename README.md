@@ -50,12 +50,18 @@ module.exports = {
 ```
 PostgreSQL setup:
 
-1.During installation set port and superuse password.
-2.To create database use the following command:
+1. During installation set port and superuse password.
+2. To create database use the following command:
+
 	```bash
 	psql -h localhost -U username
-	CREATE DATABASE dbname
+	CREATE DATABASE dbname	
 	```
-3.
+3. access database:
+	
+	```bash
+	psql -h localhost -U username -d dbname
+	```
+ 
 
 
