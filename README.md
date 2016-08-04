@@ -15,6 +15,13 @@ Download and install the following software:
             ```bash
             sudo apt-get install redis-server
             ```
+4.  PostgreSQL
+		-[Windows](https://www.postgresql.org/download/windows/)
+		-[Mac](https://www.postgresql.org/download/macosx/)
+		-Ubuntu
+			```bash
+			sudo apt-get install postgresql-9.4 
+			```
 
 ## Setup
 
@@ -41,3 +48,22 @@ module.exports = {
   postgres_href: "postgress://username:password@localhost:5432/database_name"
 }
 ```
+PostgreSQL setup
+1.	to create a database use the following command:
+	```bash 
+	psql –h 	localhost –U username
+	``` 
+	a.	then:
+	```bash 
+	CREATE DATABASE dbname
+	```
+2.	to access database: ```bash
+	psql –h localhost –U username -d mydb
+	```
+	a.	note: you must enter the password you set for the user account to access database and user account
+3.	to create a table using an .sql file: 
+	```bash
+	psql -U username -	h localhost -d database_name < path/to/your/file.sql
+	```
+4. if psql is not found then run the commands directly		   from  the bin folder.
+
