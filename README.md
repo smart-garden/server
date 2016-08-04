@@ -11,16 +11,14 @@ Download and install the following software:
 3. Redis Server
     - [Windows](https://github.com/MSOpenTech/redis/releases/tag/win-2.8.2400)
     - [Mac](http://redis.io/download)
-    - Ubuntu
-           
+    - Ubuntu           
             ```bash
             sudo apt-get install redis-server
             ```
 4.  PostgreSQL
 	- [Windows](https://www.postgresql.org/download/windows/)
 	- [Mac](https://www.postgresql.org/download/macosx/)
-	- Ubuntu
-			
+	- Ubuntu			
 			```bash
 			sudo apt-get install postgresql-9.4 
 			```	
