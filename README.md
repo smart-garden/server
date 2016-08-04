@@ -16,7 +16,6 @@ Download and install the following software:
             ```bash
             sudo apt-get install redis-server
             ```
-
 4.  PostgreSQL
 	- [Windows](https://www.postgresql.org/download/windows/)
 	- [Mac](https://www.postgresql.org/download/macosx/)
