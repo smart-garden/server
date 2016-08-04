@@ -63,3 +63,8 @@ module.exports = {
 	```bash
 	psql -h localhost -U username -d dbname
 	```
+4. to create table using .sql file:
+
+	```bash
+	psql -U username -h localhost-d dbname <path/to/your/file.sql
+	```
