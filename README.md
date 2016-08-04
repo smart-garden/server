@@ -49,21 +49,15 @@ module.exports = {
 }
 ```
 
-PostgreSQL setup
-1.	to create a database use the following command:
+1. During installation set port and superuse password.
+2. To create database use the following command:
+
 	```bash
-	psql –h 	localhost –U username
-	```
-	a.	then:
-	```bash
+	psql -h localhost -U username
 	CREATE DATABASE dbname
 	```
-2.	to access database: ```bash
-	psql –h localhost –U username -d mydb
-	```
-	a.	note: you must enter the password you set for the user account to access database and user account
-3.	to create a table using an .sql file:
+3. access database:
+
 	```bash
-	psql -U username -	h localhost -d database_name < path/to/your/file.sql
+	psql -h localhost -U username -d dbname
 	```
-4. if psql is not found then run the commands directly		   from  the bin folder.
