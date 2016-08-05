@@ -1,4 +1,4 @@
-var config = require('./config.js');
+var config = require('../config.js');
 var pgp = require('pg-promise')();
 var db = pgp(config.postgres_href);
 
