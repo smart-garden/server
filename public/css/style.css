@@ -11,3 +11,8 @@ a {
   /*Different margin for vertical block buttons*/
     margin: .5rem;
 }
+
+.logout_button {
+  display:inline; 
+  padding: 50px;
+}
