@@ -22,17 +22,17 @@ CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	firstname TEXT NOT NULL,
 	lastname TEXT NOT NULL,
-	email CITEXT NOT NULL UNIQUE,
+	email TEXT NOT NULL UNIQUE,
 	username TEXT NOT NULL UNIQUE,
 	pass TEXT NOT NULL,
-	reg_date INTEGER NOT NULL
+	reg_date TEXT NOT NULL
 );
 
 CREATE TABLE gardens (
 	id SERIAL PRIMARY KEY,
 	water_usage INTEGER NOT NULL,
 	power_usage INTEGER NOT NULL,
-	reg_date INTEGER NOT NULL
+	reg_date INTEGER NOT NULL,
 	location_id FOREIGN KEY REFERENCES locations (id)
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE levels (
 	sku TEXT NOT NULL UNIQUE,
 	level_num INT NOT NULL UNIQUE,
 	garden_id FOREIGN KEY REFERENCES gardens(id)
-),
+);
 
 CREATE TABLE pods (
 	id SERIAL PRIMARY KEY,
@@ -60,5 +60,5 @@ CREATE TABLE plants (
 	id SERIAL PRIMARY KEY,
 	reference_data INT, /* need to pluggin reference here once we
 	settle on a database to pull info from. Or make our own reference
-	data table*/ 
+	data table*/
 );
