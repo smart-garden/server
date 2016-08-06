@@ -23,15 +23,15 @@ addUser = function(firstname, lastname, email, username, pass, done ) {
 	.catch(function(error) {
 		console.log(error);
 		done(null, false);
-	})
-}
+	});
+};
 
 /*function to find users
 This is used to login to smart garden*/
 getUser = function(email, pass, done) {
 	var query = "SELECT * FROM users " +
-              "WHERE email = '"+ email +"'"
-              + "AND pass =  '"+ pass +"';";
+              "WHERE email = '"+ email +"'" +
+							 "AND pass =  '"+ pass +"';";
 
 	db.any(query)
     .then(function (data) {
@@ -45,7 +45,7 @@ getUser = function(email, pass, done) {
       console.log(error);
       done(null, false);
     });
-}
+};
 
 /*function to get the current day so that it can be used for
 the registration date field */
@@ -61,4 +61,4 @@ function today() {
 module.exports = {
 	addUser: addUser,
 	getUser: getUser
-}
+};
