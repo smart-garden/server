@@ -67,8 +67,8 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
           req.session.user = user;
           res.redirect('/home');
       }
-  });
-});
+  })
+})
 
 
 /* POST the signup form into database and returns
