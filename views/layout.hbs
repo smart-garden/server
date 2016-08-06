@@ -17,6 +17,10 @@
     <script>
         var found = angular.module('found', ['mm.foundation']);
         // $(document).foundation();
+        found.controller('GreetingController', ['$scope',
+         function($scope) {
+          $scope.greeting = 'Hola!';
+        }]);
     </script>
   </head>
 
@@ -32,6 +36,9 @@
         <li class="current"><a>{{view_ctx.curr}}</a></li>
       </ul>
     {{/if}}
+    <div ng-controller="GreetingController">
+      <p>{{ greeting }}</p>
+    </div>
     {{{body}}}
 
   </body>

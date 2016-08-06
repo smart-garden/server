@@ -49,11 +49,11 @@ router.get('/', checkLoggedOut, function(req, res, next) {
 /*POST login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
 //so this doesn't authenticate by password yet.
-router.post('/login/submit/', checkLoggedOut, function(req, res) { 
+router.post('/login/submit/', checkLoggedOut, function(req, res) {
   var email = req.body.email;
   var pass = req.body.pass;
 
-  db.getUser(email,pass, function (user, success) {
+  db.getUser(email, pass, function (user, success) {
       if (!success) {
           var msg = "incorrect login credentials";
           res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
@@ -63,11 +63,11 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
           req.session.user = user;
           res.redirect('/home');
       }
-  });
-});
+  })
+})
 
 
-/* POST the signup form into database and returns 
+/* POST the signup form into database and returns
 success or failure */
 router.post('/signup/submit', function(req, res) {
   db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username, req.body.pass, function (data, success) {
@@ -77,7 +77,7 @@ router.post('/signup/submit', function(req, res) {
         lastname: req.body.lastname,
         username: req.body.username,
         //TODO: password encryption
-        pass: req.body.pass, 
+        pass: req.body.pass,
         email: req.body.email
       }
       var msg = "sign up successful";
@@ -90,7 +90,7 @@ router.post('/signup/submit', function(req, res) {
     }
   });
 });
-  
+
 
 
 /* GET SignUp Page. */
