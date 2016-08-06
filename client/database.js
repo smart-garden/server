@@ -30,8 +30,8 @@ addUser = function(firstname, lastname, email, username, pass, done ) {
 This is used to login to smart garden*/
 getUser = function(email, pass, done) {
 	var query = "SELECT * FROM users " +
-              "WHERE email = '"+ email +"'" +
-							 "AND pass =  '"+ pass +"';";
+               "WHERE email = '"+ email +"'"
+              + "AND pass =  '"+ pass +"';";
 
 	db.any(query)
     .then(function (data) {
