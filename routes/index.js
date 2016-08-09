@@ -56,15 +56,19 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
   db.getUser(email, pass, function (user, success) {
       if (!success) {
           var msg = "incorrect login credentials";
-          res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
+          res.render('login', {
+             title: 'SmartGarden | login to SmartGarden',
+             title_slug: "login",
+             msg: msg
+           });
       }
       else {
           console.log(user);
           req.session.user = user;
           res.redirect('/home');
       }
-  })
-})
+  });
+});
 
 
 /* POST the signup form into database and returns
@@ -79,14 +83,23 @@ router.post('/signup/submit', function(req, res) {
         //TODO: password encryption
         pass: req.body.pass,
         email: req.body.email
-      }
+      };
       var msg = "sign up successful";
       req.session.user = user;
-      res.render('home', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", user: user, msg:msg });
+      res.render('home', {
+        title: 'SmartGarden SignUp | Innovating Gardening',
+        title_slug: "signup",
+        user: req.session.user.username,
+        msg:msg
+      });
     }
     else {
       var msg = "username or email already in use";
-      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      res.render('signup', {
+        title: 'SmartGarden SignUp | Innovating Gardening',
+        title_slug: "signup",
+        msg:msg
+      });
     }
   });
 });
@@ -95,7 +108,10 @@ router.post('/signup/submit', function(req, res) {
 
 /* GET SignUp Page. */
 router.get('/signup', checkLoggedOut, function(req, res, next) {
-  res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
+  res.render('signup', {
+    title: 'SmartGarden SignUp | Innovating Gardening',
+    title_slug: "signup"
+  });
 });
 
 /* GET home page. */
