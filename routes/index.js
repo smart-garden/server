@@ -81,8 +81,8 @@ router.post('/signup/submit', function(req, res) {
         email: req.body.email
       }
       var msg = "sign up successful";
-      //req.session.user = user;
-      res.render('home', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      req.session.user = user;
+      res.render('home', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", user: user, msg:msg });
     }
     else {
       var msg = "username or email already in use";
@@ -100,7 +100,11 @@ router.get('/signup', checkLoggedOut, function(req, res, next) {
 
 /* GET home page. */
 router.get('/home', checkLoggedIn, function(req, res, next) {
-  res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
+  res.render('home', {
+    title: 'SmartGarden Home | Innovating Gardening',
+    title_slug: "home",
+    user: req.session.user.username
+  });
 });
 
 /* GET settings page. */
@@ -115,7 +119,7 @@ router.get('/settings', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Settings"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -130,7 +134,7 @@ router.get('/alerts', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Alerts"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -145,7 +149,7 @@ router.get('/register', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Register"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -160,7 +164,7 @@ router.get('/manage', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Manage Gardens"
     },
-    user: fakeUser,
+    user: req.session.user.username,
     gardens: gardens,
     gardens_exist: gardens_exist
   });
@@ -192,7 +196,7 @@ router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
       ],
       curr: specific.species + " garden " + garden_id
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
