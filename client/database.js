@@ -1,5 +1,5 @@
 var config = require('../config.js');
-var pgp = require('pg-promise')(options);
+var pgp = require('pg-promise')();
 var db = pgp(config.postgres_href);
 
 //Function that adds a user to the postgres database
@@ -23,14 +23,15 @@ addUser = function(firstname, lastname, email, username, pass, done ) {
 	.catch(function(error) {
 		console.log(error);
 		done(null, false);
-	})
-}
+	});
+};
 
 /*function to find users
 This is used to login to smart garden*/
-getUser = function(email, done) {
+getUser = function(email, pass, done) {
 	var query = "SELECT * FROM users " +
-              "WHERE email = '"+ email +"';";
+               "WHERE email = '"+ email +"'"
+              + "AND pass =  '"+ pass +"';";
 
 	db.any(query)
     .then(function (data) {
@@ -44,7 +45,7 @@ getUser = function(email, done) {
       console.log(error);
       done(null, false);
     });
-}
+};
 
 /*function to get the current day so that it can be used for
 the registration date field */

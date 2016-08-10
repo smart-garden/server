@@ -51,6 +51,8 @@ module.exports = {
 }
 ```
 
+PostgreSQL setup:
+
 1. During installation set port and superuser password.
 2. To create database use the following command:
 

@@ -67,14 +67,14 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
           req.session.user = user;
           res.redirect('/home');
       }
-  })
-})
+  });
+});
 
 
 /* POST the signup form into database and returns
 success or failure */
 router.post('/signup/submit', function(req, res) {
-  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username,req.body.pass, function (data, success) {
+  db.addUser(req.body.firstname, req.body.lastname, req.body.email, req.body.username, req.body.pass, function (data, success) {
     if (success) {
       var user = {
         firstname: req.body.firstname,
@@ -103,8 +103,6 @@ router.post('/signup/submit', function(req, res) {
     }
   });
 });
-
-
 
 /* GET SignUp Page. */
 router.get('/signup', checkLoggedOut, function(req, res, next) {
@@ -186,7 +184,6 @@ router.get('/manage', checkLoggedIn, function(req, res, next) {
   });
 });
 
-
 // Nice little function to look through gardens array for
 // garden object with a matching id
 function matchGarden(g) {
@@ -214,6 +211,16 @@ router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
     },
     user: req.session.user.username
   });
+});
+
+/*GET logout page. */
+router.get('/logout/', checkLoggedIn, function(req, res, next){
+  // Destroy the session.
+  req.session.destroy(function(err){
+    console.log(err);
+  });
+  // Redirect to the login page.
+  res.redirect('/');
 });
 
 module.exports = router;
