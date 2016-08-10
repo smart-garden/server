@@ -105,7 +105,6 @@ router.post('/signup/submit', function(req, res) {
 });
 
 
-
 /* GET SignUp Page. */
 router.get('/signup', checkLoggedOut, function(req, res, next) {
   res.render('signup', {
@@ -186,7 +185,6 @@ router.get('/manage', checkLoggedIn, function(req, res, next) {
   });
 });
 
-
 // Nice little function to look through gardens array for
 // garden object with a matching id
 function matchGarden(g) {
@@ -213,7 +211,18 @@ router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
       curr: specific.species + " garden " + garden_id
     },
     user: req.session.user.username
+
   });
+});
+
+/*GET logout page. */
+router.get('/logout/', checkLoggedIn, function(req, res, next){
+  // Destroy the session.
+  req.session.destroy(function(err){
+    console.log(err);
+  });
+  // Redirect to the login page.
+  res.redirect('/');
 });
 
 module.exports = router;
