@@ -46,7 +46,11 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
   db.getUser(email, pass, function (user, success) {
       if (!success) {
           var msg = "incorrect login credentials";
-          res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login", msg: msg });
+          res.render('login', {
+             title: 'SmartGarden | login to SmartGarden',
+             title_slug: "login",
+             msg: msg
+           });
       }
       else {
           console.log(user);
@@ -70,26 +74,40 @@ router.post('/signup/submit', function(req, res) {
         email: req.body.email
       };
       var msg = "sign up successful";
-      //req.session.user = user;
-      res.render('home', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      req.session.user = user;
+      res.render('home', {
+        title: 'SmartGarden SignUp | Innovating Gardening',
+        title_slug: "signup",
+        user: req.session.user.username,
+        msg:msg
+      });
     }
     else {
       var msg = "username or email already in use";
-      res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup", msg:msg });
+      res.render('signup', {
+        title: 'SmartGarden SignUp | Innovating Gardening',
+        title_slug: "signup",
+        msg:msg
+      });
     }
   });
 });
 
-
-
 /* GET SignUp Page. */
 router.get('/signup', checkLoggedOut, function(req, res, next) {
-  res.render('signup', { title: 'SmartGarden SignUp | Innovating Gardening', title_slug: "signup" });
+  res.render('signup', {
+    title: 'SmartGarden SignUp | Innovating Gardening',
+    title_slug: "signup"
+  });
 });
 
 /* GET home page. */
 router.get('/home', checkLoggedIn, function(req, res, next) {
-  res.render('home', { title: 'SmartGarden Home | Innovating Gardening', title_slug: "home" });
+  res.render('home', {
+    title: 'SmartGarden Home | Innovating Gardening',
+    title_slug: "home",
+    user: req.session.user.username
+  });
 });
 
 /* GET settings page. */
@@ -104,7 +122,7 @@ router.get('/settings', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Settings"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -119,7 +137,7 @@ router.get('/alerts', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Alerts"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -134,7 +152,7 @@ router.get('/register', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Register"
     },
-    user: fakeUser
+    user: req.session.user.username
   });
 });
 
@@ -149,12 +167,11 @@ router.get('/manage', checkLoggedIn, function(req, res, next) {
       ],
       curr: "Manage Gardens"
     },
-    user: fakeUser,
+    user: req.session.user.username,
     gardens: gardens,
     gardens_exist: gardens_exist
   });
 });
-
 
 // Nice little function to look through gardens array for
 // garden object with a matching id
@@ -181,8 +198,18 @@ router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
       ],
       curr: specific.species + " garden " + garden_id
     },
-    user: fakeUser
+    user: req.session.user.username
   });
+});
+
+/*GET logout page. */
+router.get('/logout/', checkLoggedIn, function(req, res, next){
+  // Destroy the session.
+  req.session.destroy(function(err){
+    console.log(err);
+  });
+  // Redirect to the login page.
+  res.redirect('/');
 });
 
 /*GET logout page. */
