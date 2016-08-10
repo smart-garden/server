@@ -223,4 +223,14 @@ router.get('/logout/', checkLoggedIn, function(req, res, next){
   res.redirect('/');
 });
 
+/*GET logout page. */
+router.get('/logout/', checkLoggedIn, function(req, res, next){
+  // Destroy the session.
+  req.session.destroy(function(err){
+    console.log(err);
+  });
+  // Redirect to the login page.
+  res.redirect('/');
+});
+
 module.exports = router;

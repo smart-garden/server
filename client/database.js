@@ -61,4 +61,4 @@ function today() {
 module.exports = {
 	addUser: addUser,
 	getUser: getUser
-}
+};
