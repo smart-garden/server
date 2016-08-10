@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../client/database.js');
 
 var checkLoggedIn = require('./middleware/checkLoggedIn.js');
-var checkLoggedOut = require('./middleware/checkLoggedout');
+var checkLoggedOut = require('./middleware/checkLoggedout.js');
 
 // NOTE: These are dummy objects of no real use set up for the purpose
 //        of creating a realistic routing mockup
@@ -31,20 +31,10 @@ var gardens = [
 
 // END REMOVE DUMMIES
 
-function slugify(text) {
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-    .replace(/^-+/, '')             // Trim - from start of text
-    .replace(/-+$/, '');            // Trim - from end of text
-}
-
 /* GET login page. */
 router.get('/', checkLoggedOut, function(req, res, next) {
   res.render('login', { title: 'SmartGarden | login to SmartGarden', title_slug: "login" });
 });
-
 
 /*POST login information*/
 //ISSUE:passwords store as undefined in postgres right now through the form.
@@ -65,7 +55,6 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
       }
   });
 });
-
 
 /* POST the signup form into database and returns
 success or failure */
