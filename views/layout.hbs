@@ -17,6 +17,7 @@
     <script>
         var found = angular.module('found', ['mm.foundation']);
         // $(document).foundation();
+
     </script>
   </head>
 
@@ -32,13 +33,15 @@
         <li class="current"><a>{{view_ctx.curr}}</a></li>
       </ul>
     {{/if}}
-    {{#if user}}
-    <div class="logout_button">
-      <a class="button" href="/logout/" type="button">Logout</a>
+    <div>
+      {{user}}
     </div>
+    {{#if user}}
+      <div class="logout_button">
+        <a class="button" href="/logout/" type="button">Logout</a>
+      </div>
     {{/if}}
     {{{body}}}
 
   </body>
-
 </html>

@@ -11,7 +11,8 @@ Download and install the following software:
 3. Redis Server
     - [Windows](https://github.com/MSOpenTech/redis/releases/tag/win-2.8.2400)
     - [Mac](http://redis.io/download)
-    - Ubuntu           
+    - Ubuntu
+
             ```bash
             sudo apt-get install redis-server
             ```
@@ -19,9 +20,10 @@ Download and install the following software:
 	- [Windows](https://www.postgresql.org/download/windows/)
 	- [Mac](https://www.postgresql.org/download/macosx/)
 	- Ubuntu			
+
 			```bash
-			sudo apt-get install postgresql-9.4 
-			```	
+			sudo apt-get install postgresql-9.4
+			```
 
 ## Setup
 
@@ -48,6 +50,7 @@ module.exports = {
   postgres_href: "postgress://username:password@localhost:5432/database_name"
 }
 ```
+
 PostgreSQL setup:
 
 1. During installation set port and superuser password.
@@ -55,18 +58,15 @@ PostgreSQL setup:
 
 	```bash
 	psql -h localhost -U username
-	CREATE DATABASE dbname	
+	CREATE DATABASE dbname
 	```
 3. access database:
-	
+
 	```bash
 	psql -h localhost -U username -d dbname
 	```
 4. to create table using .sql file:
-	
+
 	```bash
 	psql -U username -h localhost-d dbname <path/to/your/file.sql
 	```
-	
-
-

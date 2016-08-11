@@ -22,10 +22,10 @@ CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	firstname TEXT NOT NULL,
 	lastname TEXT NOT NULL,
-	email CITEXT NOT NULL UNIQUE,
+	email TEXT NOT NULL UNIQUE,
 	username TEXT NOT NULL UNIQUE,
 	pass TEXT NOT NULL,
-	reg_date INTEGER NOT NULL
+	reg_date TEXT NOT NULL
 );
 
 CREATE TABLE gardens (
@@ -47,7 +47,7 @@ CREATE TABLE levels (
 	sku TEXT NOT NULL UNIQUE,
 	level_num INT NOT NULL UNIQUE,
 	garden_id FOREIGN KEY REFERENCES gardens(id)
-),
+);
 
 CREATE TABLE pods (
 	id SERIAL PRIMARY KEY,
