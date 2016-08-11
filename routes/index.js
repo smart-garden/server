@@ -70,7 +70,6 @@ router.post('/login/submit/', checkLoggedOut, function(req, res) {
   });
 });
 
-
 /* POST the signup form into database and returns
 success or failure */
 router.post('/signup/submit', function(req, res) {
@@ -103,7 +102,6 @@ router.post('/signup/submit', function(req, res) {
     }
   });
 });
-
 
 /* GET SignUp Page. */
 router.get('/signup', checkLoggedOut, function(req, res, next) {
