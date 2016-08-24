@@ -1,66 +1,39 @@
-<!-- <div class="grid-frame v-align align-center">
-    <div class="columns small-12 medium-8 large-4 large-centered text-center vertical grid-block" style="max-height: 17.5rem;" data-equalizer>
-      <zf-accordion class="accordion">
-        <zf-accordion-item title="Today's Tasks">
-        Content goes here
-        </zf-accordion-item>
-        <zf-accordion-item title="Tomorrow's Tasks">
-        Content goes here
-        </zf-accordion-item>
-        <zf-accordion-item title="This Week">
-        Content goes here
-        </zf-accordion-item>
-        <zf-accordion-item title="Upcoming">
-        Content goes here
-        </zf-accordion-item>
-      </zf-accordion>
-    </div>
-</div> -->
 
 <script>
-  angular.module('foundationDemoApp').controller('AccordionDemoCtrl', function($scope) {
-    $scope.oneAtATime = true;
+  found.controller('AlertsCtrl', function($scope) {
+    $scope.oneAtATime = false;
 
-    $scope.groups = [{
-        title: "Dynamic Group Header - 1",
-        content: "Dynamic Group Body - 1"
-    }, {
-        title: "Dynamic Group Header - 2",
-        content: "Dynamic Group Body - 2"
-    }];
+    $scope.alerts = [
+      { type: 'alert', msg: 'Oh snap! Change a few things up and try submitting again.' },
+      { type: 'success round', msg: 'Well done! You successfully read this important alert message.' }
+    ];
 
-    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-    $scope.addItem = function() {
-        var newItemNo = $scope.items.length + 1;
-        $scope.items.push('Item ' + newItemNo);
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
     };
+
   });
 </script>
 
-<div ng-controller="AccordionDemoCtrl">
-  <label class="checkbox">
-    <input type="checkbox" ng-model="oneAtATime">
-    Open only one at a time
-  </label>
+<div ng-controller="AlertsCtrl">
 
   <accordion close-others="oneAtATime">
-    <accordion-group heading="Static Header, initially expanded" is-open="true">
-      This content is straight in the template.
+    <accordion-group is-open="true">
+      <accordion-heading>
+        Today
+     </accordion-heading>
+     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
     </accordion-group>
-    <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-      {{group.content}}
-    </accordion-group>
-    <accordion-group heading="Dynamic Body Content">
+    <accordion-group heading="Tomorrow">
       <p>The body of the accordion group grows to fit the contents</p>
         <button class="button small" ng-click="addItem()">Add Item</button>
         <div ng-repeat="item in items">{{item}}</div>
     </accordion-group>
-    <accordion-group is-open="isopen">
+    <accordion-group is-open="This Week">
         <accordion-heading>
-            I can have markup, too!
+            This Week
         </accordion-heading>
-        This is just some content to illustrate fancy headings.
+        Alerts for the week will go here
     </accordion-group>
   </accordion>
 </div>
