@@ -44,21 +44,21 @@ Create a config file in the main directory. Name your file "config.js".
 Copy and paste this code and fill in the necessary info.
 
 ```javascript
-var config = {
-module.exports = {
+var config = module.exports = {
   redis_secret: "make_your_own_secret",
-  postgres_href: "postgress://username:password@localhost:5432/database_name"
+  postgres_href: "postgres://username:password@localhost:5432/database_name"
 }
 ```
 
 PostgreSQL setup:
 
 1. During installation set port and superuser password.
+
 2. To create database use the following command:
 
 	```bash
-	psql -h localhost -U username
-	CREATE DATABASE dbname
+	$ psql -h localhost -U username
+	username=# CREATE DATABASE dbname;
 	```
 3. access database:
 
@@ -68,5 +68,5 @@ PostgreSQL setup:
 4. to create table using .sql file:
 
 	```bash
-	psql -U username -h localhost-d dbname <path/to/your/file.sql
+	psql -U username -h localhost -d dbname < path/to/your/file.sql
 	```
