@@ -9,7 +9,7 @@ function checkLoggedInAdmin(req, res, next) {
           // if logged in then allow request
           next();
         } else {
-          res.redirect('/admin');
+          res.redirect('/login');
         }
     }
 }
