@@ -6,15 +6,14 @@ var db = pgp(config.postgres_href);
 //uses sql query language instead of sequelize now
 addUser = function(firstname, lastname, email, username, pass, done ) {
 	var date = today();
-	var query = "INSERT INTO users" + "(firstname, lastname, email, username, pass, reg_date)" +
-							"VALUES ('"
-										 	+ firstname + "', '"
-										 	+ lastname + "', '"
-										 	+ email + "', '"
-										 	+ username + "', '"
-										 	+ pass + "', '"
-										 	+ date + "')"
-							+ "RETURNING id;";
+	var query = "INSERT INTO users" + "(firstname, lastname, email, username, pass, reg_date, role)" +
+							"VALUES ('" + firstname + "', '" +
+										 	lastname + "', '" +
+										 	email + "', '" +
+										 	username + "', '" +
+										 	pass + "', '" +
+										 	date + "', 'user') " +
+										"RETURNING id;";
 	db.any(query)
 	.then(function(data) {
 		console.log(data);
@@ -47,6 +46,27 @@ getUser = function(email, pass, done) {
     });
 };
 
+// function to query for admin users
+getAdminUser = function(email, pass, done) {
+	var query = "SELECT * FROM users " +
+               "WHERE email = '"+ email +"'" +
+            		"AND pass =  '"+ pass + "'" +
+								"AND role = 'admin';";
+
+	db.any(query)
+    .then(function (data) {
+      console.log(data);
+      if (data.length > 0)
+        done(data[0], true);
+      else
+        done(null, false);
+    })
+    .catch(function (error) {
+      console.log(error);
+      done(null, false);
+    });
+};
+
 /*function to get the current day so that it can be used for
 the registration date field */
 function today() {
@@ -60,5 +80,6 @@ function today() {
 
 module.exports = {
 	addUser: addUser,
-	getUser: getUser
+	getUser: getUser,
+	getAdminUser: getAdminUser
 };

@@ -25,7 +25,8 @@ CREATE TABLE users (
 	email TEXT NOT NULL UNIQUE,
 	username TEXT NOT NULL UNIQUE,
 	pass TEXT NOT NULL,
-	reg_date TEXT NOT NULL
+	reg_date TEXT NOT NULL,
+	role TEXT NOT NULL
 );
 
 CREATE TABLE gardens (
