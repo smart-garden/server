@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS states CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS gardens CASCADE;
 DROP TABLE IF EXISTS garden_ownership CASCADE;
@@ -33,27 +35,20 @@ CREATE TABLE gardens (
 	water_usage INTEGER NOT NULL,
 	power_usage INTEGER NOT NULL,
 	reg_date INTEGER NOT NULL,
-	location_id FOREIGN KEY REFERENCES locations (id)
+	location_id INTEGER REFERENCES location(id)
 );
 
 CREATE TABLE garden_ownership (
 	id SERIAL PRIMARY KEY,
-	user_id FOREIGN KEY REFERENCES users(id),
-	garden_id FOREIGN KEY REFERENCES gardens(id)
+	user_id INTEGER REFERENCES users(id),
+	garden_id INTEGER REFERENCES gardens(id)
 );
 
 CREATE TABLE levels (
 	id SERIAL PRIMARY KEY,
 	sku TEXT NOT NULL UNIQUE,
 	level_num INT NOT NULL UNIQUE,
-	garden_id FOREIGN KEY REFERENCES gardens(id)
-);
-
-CREATE TABLE pods (
-	id SERIAL PRIMARY KEY,
-	port_num INT NOT NULL UNIQUE,
-	level_id FOREIGN KEY REFERENCES levels(id),
-	plant_id FOREIGN KEY REFERENCES plants(id)
+	garden_id INTEGER REFERENCES gardens(id)
 );
 
 CREATE TABLE plants (
@@ -61,4 +56,11 @@ CREATE TABLE plants (
 	reference_data INT /* need to pluggin reference here once we
 	settle on a database to pull info from. Or make our own reference
 	data table*/
+);
+
+CREATE TABLE pods (
+	id SERIAL PRIMARY KEY,
+	port_num INT NOT NULL UNIQUE,
+	level_id INTEGER REFERENCES levels(id),
+	plant_id INTEGER REFERENCES plants(id)
 );
