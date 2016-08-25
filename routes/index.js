@@ -203,6 +203,20 @@ router.get('/manage/:gardenId', checkLoggedIn, function(req, res, next) {
   });
 });
 
+router.get('/serials', checkLoggedIn, function(req, res, next) {
+  res.render('serials', {
+    title: 'Admin Serial Generator',
+    title_slug: "serials",
+    view_ctx: {
+      prev: [
+        "Home"
+      ],
+      curr: "Serial Generator"
+    },
+    user: req.session.user.username,
+  });
+});
+
 /*GET logout page. */
 router.get('/logout/', checkLoggedIn, function(req, res, next){
   // Destroy the session.
