@@ -20,13 +20,15 @@ CREATE TABLE location (
 	state_id INTEGER REFERENCES states (id) NOT NULL
 );
 
+Create TYPE role AS ENUM ('normal', 'admin');
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	firstname TEXT NOT NULL,
 	lastname TEXT NOT NULL,
 	email TEXT NOT NULL UNIQUE,
-	username TEXT NOT NULL UNIQUE,
+	username TEXT NOT NULL UNIQUE CHECK (username <> ''),
 	pass TEXT NOT NULL,
+	role_state role NOT NULL,
 	reg_date TEXT NOT NULL
 );
 
@@ -34,7 +36,7 @@ CREATE TABLE gardens (
 	id SERIAL PRIMARY KEY,
 	water_usage INTEGER NOT NULL,
 	power_usage INTEGER NOT NULL,
-	reg_date INTEGER NOT NULL,
+	reg_date TEXT NOT NULL,
 	location_id INTEGER REFERENCES location(id)
 );
 
