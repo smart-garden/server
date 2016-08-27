@@ -6,13 +6,15 @@ var db = pgp(config.postgres_href);
 //uses sql query language instead of sequelize now
 addUser = function(firstname, lastname, email, username, pass, done ) {
 	var date = today();
-	var query = "INSERT INTO users" + "(firstname, lastname, email, username, pass, reg_date)" +
+	var role =  "normal";
+	var query = "INSERT INTO users" + "(firstname, lastname, email, username, pass, role_state, reg_date)" +
 							"VALUES ('"
 										 	+ firstname + "', '"
 										 	+ lastname + "', '"
 										 	+ email + "', '"
 										 	+ username + "', '"
 										 	+ pass + "', '"
+										 	+ role + "', '"
 										 	+ date + "')"
 							+ "RETURNING id;";
 	db.any(query)
