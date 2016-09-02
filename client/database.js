@@ -49,6 +49,23 @@ getUser = function(email, pass, done) {
     });
 };
 
+updateUserPassword = function (username,new_pass, done) {
+	var query = "UPDATE users " +
+				"SET pass = '"+ new_pass +"'"
+				+"WHERE username = '" + username + "';"; 
+
+
+	db.any(query)
+	.then(function (data) {
+		console.log (data);
+		done(true);
+	})
+	.catch (function (error) {
+		console.log(error);
+		done(false);
+	});
+}
+
 /*function to get the current day so that it can be used for
 the registration date field */
 function today() {
@@ -62,5 +79,6 @@ function today() {
 
 module.exports = {
 	addUser: addUser,
-	getUser: getUser
+	getUser: getUser,
+	updateUserPassword: updateUserPassword
 };
