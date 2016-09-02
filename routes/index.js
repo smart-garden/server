@@ -126,6 +126,77 @@ router.get('/settings', checkLoggedIn, function(req, res, next) {
   });
 });
 
+/* POST to update password of a user */
+router.post('/settings/submit/', function (req, res) {
+  if (req.body.new_pass == req.body.confirm_pass && req.body.new_pass != req.session.user.pass)
+  {
+    updateUserPassword(req.session.user.username, req.body.new_pass, function (user, success) {
+      if (success) {
+        var msg = "an error has occured";
+        res.render('settings', {
+        title: 'User Settings | Manage your SmartGarden Account',
+        title_slug: "settings",
+      view_ctx: {
+      prev: [
+        "Home"
+      ],
+      curr: "Settings"
+    },
+    user: req.session.user.username,
+    msg:msg
+  });
+      }
+      else {
+        var msg = "password changed";
+        res.render('settings', {
+        title: 'User Settings | Manage your SmartGarden Account',
+        title_slug: "settings",
+      view_ctx: {
+      prev: [
+        "Home"
+      ],
+      curr: "Settings"
+    },
+    user: req.session.user.username,
+    msg:msg
+  });
+      }
+    });
+  }
+  else {
+      if (req.body.new_pass == req.session.user.pass) {
+        var msg = "password is the same";
+        res.render('settings', {
+        title: 'User Settings | Manage your SmartGarden Account',
+        title_slug: "settings",
+        view_ctx: {
+        prev: [
+         "Home"
+        ],
+        curr: "Settings"
+      },
+      user: req.session.user.username,
+      msg:msg
+        });
+        }
+      else {
+        var msg = "passwords do not match";
+        res.render('settings', {
+        title: 'User Settings | Manage your SmartGarden Account',
+        title_slug: "settings",
+        view_ctx: {
+        prev: [
+          "Home"
+        ],
+        curr: "Settings"
+      },
+      user: req.session.user.username,
+      msg:msg
+        });
+        }
+      }
+});
+
 /* GET alerts page. */
 router.get('/alerts', checkLoggedIn, function(req, res, next) {
   res.render('alerts', {

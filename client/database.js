@@ -49,6 +49,7 @@ getUser = function(email, pass, done) {
     });
 };
 
+//function to update the password of the user
 updateUserPassword = function (username,new_pass, done) {
 	var query = "UPDATE users " +
 				"SET pass = '"+ new_pass +"'"
