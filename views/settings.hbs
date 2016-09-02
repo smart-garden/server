@@ -1,9 +1,14 @@
+{{#if msg}}
+    <div>
+        {{msg}}
+    </div>
+{{/if}}
 <div class="grid-frame v-align align-center">
     <div class="columns small-12 medium-8 large-4 large-centered text-center vertical grid-block card" data-equalizer>
         <div class="card-divider">
             User Settings for {{user.name}}
         </div>
-        <form class="card-content horizontal">
+        <form action ="/settings/submit" method ="post" class="card-content horizontal">
 
             <div class="row">
                 <div class="large-8 large-offset-2 small-10 small-offset-1 columns">

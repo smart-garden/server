@@ -130,7 +130,7 @@ router.get('/settings', checkLoggedIn, function(req, res, next) {
 router.post('/settings/submit/', function (req, res) {
   if (req.body.new_pass == req.body.confirm_pass && req.body.new_pass != req.session.user.pass)
   {
-    updateUserPassword(req.session.user.username, req.body.new_pass, function (user, success) {
+    db.updateUserPassword(req.session.user.username, req.body.new_pass, function (user, success) {
       if (success) {
         var msg = "an error has occured";
         res.render('settings', {
@@ -147,6 +147,12 @@ router.post('/settings/submit/', function (req, res) {
   });
       }
       else {
+        db.getUser(req.session.user.email, req.body.new_pass, function(user, success) {
+          if (success) {
+          console.log(user);
+          req.session.user = user;
+        }
+        });
         var msg = "password changed";
         res.render('settings', {
         title: 'User Settings | Manage your SmartGarden Account',
